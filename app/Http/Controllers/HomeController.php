@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+            $word =Auth::user()->word;   
+            $allpost = Post::where("word",'=',$word)->get();
+            return view('home',['posts'=>$allpost]);
+       
     }
 }

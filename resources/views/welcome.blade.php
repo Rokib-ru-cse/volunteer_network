@@ -15,7 +15,7 @@
     {{-- {{ Redirect::to('home') }} --}}
     <script>window.location = "/home";</script>
     @endif
-    <div class="bg-image" style="background-image: url({{url('images/see.jpg')}});
+    <div class="bg-image" style="background-image: url({{url('images/volunteer.jpg')}});
     background-size: cover;
       position: absolute;
       top: 0px;

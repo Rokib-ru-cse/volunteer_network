@@ -37,6 +37,8 @@ Route::get('/profile', [PostController::class, 'profile_show'])->name('profile')
 Route::post('/store', [PostController::class, 'store'])->name('storepost');
 Route::post('/edit/{id}', [PostController::class, 'editpost'])->name('editpost');
 Route::get('/postdetail/{id}', [PostController::class, 'postdetail'])->name('postdetail');
+Route::get('/search', [PostController::class, 'search'])->name('search');
+
 
 
 

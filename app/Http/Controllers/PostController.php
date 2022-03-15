@@ -10,6 +10,16 @@ class PostController extends Controller
 {
     //
     
+
+    public function search(Request $request){
+        $queryString = $request->search;
+        $allpost = Post::where('title', 'LIKE', "%$queryString%")
+        ->orWhere('service_type','LIKE','%'.$queryString.'%')
+        ->orderBy('id','DESC')->get();
+        return view('home',['posts'=>$allpost]);
+    }
+
+
     public function profile_show(Request $request)
     {  
 

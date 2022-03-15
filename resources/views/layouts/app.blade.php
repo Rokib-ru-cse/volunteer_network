@@ -28,11 +28,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a href="{{route('addpost')}}" class="btn btn-success">Add Post</a>
+                <form class="d-flex mx-5" method="GET" action="{{route('search')}}" >
+                    
+                            <input class="form-control me-2" type="search" name="search" placeholder="Search By Title or Service Type" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
-                    </ul>
+                        </ul>
+                        
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container ">
-    <div class="card my-3">
+<div class="container-fluid py-5" style="background: silver;width:100%;height:100vh">
+    <div class="card">
         <div class="card-header">
         Title : {{$post['title']}}
         </div>

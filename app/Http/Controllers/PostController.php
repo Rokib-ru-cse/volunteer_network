@@ -24,7 +24,7 @@ class PostController extends Controller
     {  
 
            $id =Auth::user()->id;
-           $allpost = Post::where("user_id",'=',$id)->get();
+           $allpost = Post::where("user_id",'=',$id)->orderBy('id','DESC')->get();
            return view('profile',['posts'=>$allpost]);
            
     }

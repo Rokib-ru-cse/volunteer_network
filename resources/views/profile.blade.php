@@ -40,6 +40,7 @@
                             <p class="card-text">Word Number : {{ $post['word'] }}</p>
                             <p class="card-text">Email : {{ $post['email'] }}</p>
                             <p class="card-text">Description : {{ $post['description'] }}</p>
+                            <p class="card-text">Posted : {{$post['created_at']->diffForHumans()}}</p>
                             <div class="d-flex justify-content-between">
 
                                 <a class="btn btn-success" href="{{ route('edit', $post['id']) }}">Edit</a>

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-
+ 
 class HomeController extends Controller
 {
     /**
@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
             $word =Auth::user()->word;   
-            $allpost = Post::where("word",'=',$word)->get();
+            $allpost = Post::where("word",'=',$word)->orderBy('id','DESC')->get();
             return view('home',['posts'=>$allpost]);
        
     }

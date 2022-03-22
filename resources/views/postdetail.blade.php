@@ -2,8 +2,45 @@
 
 @section('content')
 <div class="container-fluid py-5" style="background: silver;width:100%;height:100vh">
-    <div class="card">
-        <div class="card-header">
+    <div class="table-responsive-sm">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                
+            
+    <table class="table table-striped">
+        <tbody>
+          <tr>
+            <th scope="row">Title : </th>
+            <td>{{$post['title']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Service Type : </th>
+            <td>{{$post['service_type']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Word Number : </th>
+            <td>{{$post['word']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">User Email : </th>
+            <td>{{$post['email']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">User Phone Number : </th>
+            <td>{{$post['phone']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Description : </th>
+            <td>{{$post['description']}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+</div>
+    </div>
+    
+    {{-- <div class="card">
+        <div class="card-header" style="background: #55efc4">
         Title : {{$post['title']}}
         </div>
         <div class="card-body">
@@ -13,6 +50,6 @@
             <p class="card-text">User Phone Number : {{$post['phone']}}</p>
             <p class="card-text">Description : {{$post['description']}}</p>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

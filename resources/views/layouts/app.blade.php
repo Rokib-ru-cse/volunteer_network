@@ -28,9 +28,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+height: 100vh;">
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm navbar-light" style="background-color: #1dd1a1">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">Volunteer Network</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -39,9 +42,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (Auth::check())
-                    <a href="{{ route('addpost') }}" class="btn btn-outline-danger">Add Post</a>
+                    <a href="{{ route('addpost') }}" class="btn btn-outline-success">Add Post</a>
                     <form class="d-flex mx-5" method="GET" action="{{ route('search') }}">
-
                         <input class="form-control me-2 font-weight-bold" type="search" name="search"
                             placeholder="Search By Title or Service Type" aria-label="Search">
                         <button class="btn btn-outline-danger" type="submit">Search</button>
@@ -99,7 +101,7 @@
             </div>
         </nav>
 
-        <main style="width:100%; height:100vh";>
+        <main>
             @yield('content')
         </main>
     </div>

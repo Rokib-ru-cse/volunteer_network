@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid wrapper" style="background: #8395a7;width:100%; height:100vh;">
+<div class="container-fluid wrapper" style="background: #8395a7  no-repeat fixed center; height:100vh">
     <div class="row justify-content-center py-5">
         <div class="col-md-8">
             <div class="card">

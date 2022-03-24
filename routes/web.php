@@ -30,12 +30,12 @@ Route::get('/addpost', function(){
 })->name('addpost');
 
 //Route::get('add-blog-post-form', [PostController::class, 'index'])->addpost;
-Route::get('/profile/edit/{id}', [PostController::class, 'edit'])->name('edit');
 //Route::put('/profile/update', [PostController::class, 'update'])->name('update');
 Route::delete('/profile/{id}', [PostController::class, 'destroy'])->name('destroy');
 Route::get('/profile', [PostController::class, 'profile_show'])->name('profile');
 Route::post('/store', [PostController::class, 'store'])->name('storepost');
 Route::post('/edit/{id}', [PostController::class, 'editpost'])->name('editpost');
+Route::get('/profile/edit/{id}', [PostController::class, 'edit'])->name('edit');
 Route::get('/postdetail/{id}', [PostController::class, 'postdetail'])->name('postdetail');
 Route::get('/search', [PostController::class, 'search'])->name('search');
 

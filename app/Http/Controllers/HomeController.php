@@ -28,6 +28,5 @@ class HomeController extends Controller
             $word =Auth::user()->word;   
             $allpost = Post::where("word",'=',$word)->orderBy('id','DESC')->get();
             return view('home',['posts'=>$allpost]);
-       
     }
 }

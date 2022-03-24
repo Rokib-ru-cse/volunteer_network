@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div style="background: silver" class="pt-5">
+    <div class="container-fluid pt-5" style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);">
         <div class="container">
             <h1 class="text-center mb-3">Your Profile</h1>
             <table class="table table-striped">

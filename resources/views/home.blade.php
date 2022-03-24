@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid "
-style="background: #c8d6e5"
->
+<div class="container-fluid " style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%)">
+
     <div class="w-50 mx-auto py-5">
 @foreach($posts as $post)
     <div class="card mb-3">

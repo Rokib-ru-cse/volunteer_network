@@ -67,8 +67,7 @@
 
                                 <div class="col-md-6">
                                     <input  type="number"
-                                        name="phone" value="{{ $post['phone'] }}" required autocomplete="phone" autofocus>
-                                    </input> 
+                                        name="phone" value="{{ $post['phone'] }}" required autocomplete="phone" autofocus>> 
                                 </div>
                             </div>
 
@@ -76,14 +75,10 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <textarea name="description" class="form-control" rows="3">{{ $post['description'] }}</textarea>
+                                    <textarea class="form-control" name="description" required autofocus>{{ $post['description'] }}</textarea> 
                                 </div>
                                 </div>
                             </div>
-                            
-                           
-
-                            
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

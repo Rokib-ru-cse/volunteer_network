@@ -22,11 +22,9 @@ class PostController extends Controller
 
     public function profile_show(Request $request)
     {  
-
            $id =Auth::user()->id;
            $allpost = Post::where("user_id",'=',$id)->orderBy('id','DESC')->get();
-           return view('profile',['posts'=>$allpost]);
-           
+           return view('profile',['posts'=>$allpost]);    
     }
 
     public function postdetail(Request $request,$id){
@@ -70,7 +68,6 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-
         return redirect()->route('profile');
     }
 

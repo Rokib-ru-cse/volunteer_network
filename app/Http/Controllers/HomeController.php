@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
- 
+
 class HomeController extends Controller
 {
     /**
@@ -25,8 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-            $word =Auth::user()->word;   
-            $allpost = Post::where("word",'=',$word)->orderBy('id','DESC')->get();
-            return view('home',['posts'=>$allpost]);
+        if (Auth::user()->type == "admin") {
+            $allpost = Post::orderBy('id', 'DESC')->get();
+            return view('home', ['posts' => $allpost]);
+        }
+        $word = Auth::user()->word;
+        $allpost = Post::where("word", '=', $word)->orderBy('id', 'DESC')->get();
+        return view('home', ['posts' => $allpost]);
     }
 }

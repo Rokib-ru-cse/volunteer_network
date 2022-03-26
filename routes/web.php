@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,12 @@ Route::post('/edit/{id}', [PostController::class, 'editpost'])->name('editpost')
 Route::get('/profile/edit/{id}', [PostController::class, 'edit'])->name('edit');
 Route::get('/postdetail/{id}', [PostController::class, 'postdetail'])->name('postdetail');
 Route::get('/search', [PostController::class, 'search'])->name('search');
+
+Route::get('/userlist', [UserController::class, 'userlist'])->name('userlist');
+Route::get('/volunteerlist', [UserController::class, 'volunteerlist'])->name('volunteerlist');
+Route::delete('/xxxx/{id}', [UserController::class, 'deleteuser'])->name('deleteuser');
+Route::get('/userlist/{id}', [UserController::class, 'userposts'])->name('userposts');
+Route::get('/volunteerlist/{id}', [UserController::class, 'volunteerposts'])->name('volunteerposts');
 
 
 

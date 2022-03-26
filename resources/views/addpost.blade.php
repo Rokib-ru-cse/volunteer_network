@@ -70,21 +70,15 @@
 
                                 <div class="col-md-6">
                                     <input  type="number"
-                                        name="phone" value="" required autocomplete="phone" autofocus>
-                                    </input> 
+                                        name="phone" value="" required autocomplete="phone" autofocus> 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
-
                                 <div class="col-md-6">
-                                    <textarea class="form-control" name="description" value="" required autocomplete="description" autofocus>
-                                    </textarea> 
+                                    <textarea class="form-control" name="description" required autofocus></textarea> 
                                 </div>
                             </div>
-                           
-
-                            
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

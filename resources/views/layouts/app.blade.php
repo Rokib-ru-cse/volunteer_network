@@ -48,6 +48,10 @@ height: 100vh;">
                             placeholder="Search By Title or Service Type" aria-label="Search">
                         <button class="btn btn-outline-danger" type="submit">Search</button>
                     </form>
+                    @if(Auth::user()->type == "admin")
+                    <a href="{{route('userlist')}}" class="btn btn-outline-primary mx-2">User List</a>
+                    <a href="{{route('volunteerlist')}}" class="btn btn-outline-primary">Volunteer List</a>
+                    @endif
                 @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->

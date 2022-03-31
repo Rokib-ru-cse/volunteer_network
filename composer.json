@@ -13,7 +13,6 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "spatie/laravel-ignition": "^1.0",
-        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

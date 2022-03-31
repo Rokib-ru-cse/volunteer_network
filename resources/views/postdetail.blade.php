@@ -6,8 +6,10 @@
         <div class="table-responsive-sm">
             <div class="row">
                 <div class="col-md-8 mx-auto">
+                    @if(Auth::User()->type=='volunteer')
                     <form action="{{route('updatestatus',$post['id'])}}" method="POST">
                         @csrf
+                    @endif
                     <table class="table table-striped table-dark">
                         <tbody>
                             <tr>
@@ -32,15 +34,28 @@
                             </tr>
                         </tbody>
                     </table>
-                <input name="status" type="hidden" value="processing">
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-outline-success">
-                                {{ __('Provide Service') }}
-                            </button>
-                        </div>
+                    @if(Auth::User()->type=='user')
+                    <div class="d-flex justify-content-between">
+
+                        <a class="btn btn-success" href="{{route('edit',$post['id'])}}">Edit</a> 
+                        <form method="post" action="{{route('destroy',$post['id'])}}" onsubmit="return confirm('Sure?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="btn btn-danger"/>
+                         </form>
                     </div>
-                </form>
+                    @else
+
+                    <input name="status" type="hidden" value="processing">
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-outline-success">
+                                    {{ __('Provide Service') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    @endif
                 </div>
             </div>
         </div>

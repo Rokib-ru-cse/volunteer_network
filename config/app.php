@@ -135,7 +135,6 @@ return [
     */
 
     'providers' => [
-        \Torann\GeoIP\GeoIPServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...

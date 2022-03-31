@@ -51,7 +51,7 @@ Route::get('/volunteerprofile/{param}', [VolunteerController::class, 'profile_sh
 
 
 Route::delete('/profile/{id}', [PostController::class, 'destroy'])->name('destroy');
-Route::get('/profile', [PostController::class, 'profile_show'])->name('profile');
+Route::get('/profile/{param}', [PostController::class, 'profile_show'])->name('profile');
 Route::post('/store', [PostController::class, 'store'])->name('storepost');
 Route::post('/edit/{id}', [PostController::class, 'editpost'])->name('editpost');
 Route::get('/profile/edit/{id}', [PostController::class, 'edit'])->name('edit');

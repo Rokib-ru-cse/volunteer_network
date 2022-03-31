@@ -8,7 +8,7 @@
             @foreach ($posts as $post)
                 <div class="card mb-3">
                     <div class="card-header" style="background: #55efc4">
-                        Service Type : {{ App\Models\ServiceType::find($post['service_type'])['name'] }}
+                        Service Type : {{ App\Models\ServiceType::find($post['service_type'])['name']}}
                     </div>
                     <div class="card-body" style="background: #e3f2fd">
                         <p class="card-text">Word Number : {{ $post['word'] }}</p>
@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between mt-2">
                             <a class="btn btn-outline-success" href="{{ route('postdetail', $post['id']) }}">See
                                 Details</a>
-                                <p>Status : {{App\Models\Status::find($post->id)['status']}}</p>
+                                <p>Status : {{App\Models\Status::where('post_id','=', $post->id)->get()[0]->status}}</p>
                         </div>
                         @if (Auth::user()->type == 'admin')
                             <div class="d-flex justify-content-between mt-2">

@@ -103,7 +103,7 @@ height: 100vh;">
                                         {{ __('Profile') }}
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                    <a class="dropdown-item" href="{{  route('profile','processing') }}">
 
                                         {{ __('Profile') }}
                                     </a>

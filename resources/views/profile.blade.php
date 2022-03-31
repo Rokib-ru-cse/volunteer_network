@@ -36,32 +36,45 @@
         <div class="container">
             <div class="w-50 mx-auto">
                 @if (Auth::user()->type == 'user')
-                    <h1 class="my-5 text-center">Your Posts</h1>
-                    @foreach ($posts as $post)
-                        <div class="card my-3">
-                            <div class="card-header">
-                                <h5 class="card-title">Service Type :
-                                    {{ App\Models\ServiceType::find($post['service_type'])['name'] }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Word Number : {{ $post['word'] }}</p>
-                                <p class="card-text">Email : {{ $post['email'] }}</p>
-                                <p class="card-text">Description : {{ $post['description'] }}</p>
-                                <p class="card-text">Posted : {{ $post['created_at']->diffForHumans() }}</p>
-                                <div class="d-flex justify-content-between">
-
-                                    <a class="btn btn-success" href="{{ route('edit', $post['id']) }}">Edit</a>
-                                    <form method="post" action="{{ route('destroy', $post['id']) }}"
-                                        onsubmit="return confirm('Sure?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" value="Delete" class="btn btn-danger" />
-                                    </form>
-                                </div>
-
+                <div class="container">
+                    <div class="mx-auto">
+                        <h1>Services You Are getting</h1>
+                        <div class="row">
+                            <div class="col-md-8 offset-2 d-flex justify-content-between">
+                                <a href="{{ route('profile', 'processing') }}"
+                                    class="btn btn-outline-dark">Processing</a>
+                                <a href="{{ route('profile', 'completed') }}"
+                                    class="btn btn-outline-dark">Completed</a>
+                                <a href="{{ route('profile', 'rejected') }}"
+                                    class="btn btn-outline-dark">Rejected</a>
                             </div>
                         </div>
-                    @endforeach
+                        @foreach ($posts as $post)
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    <h5 class="card-title">Service Type :
+                                        {{App\Models\ServiceType::find($post['service_type'])['name'] }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Word Number : {{ $post['word'] }}</p>
+                                    <p class="card-text">Email : {{ $post['email'] }}</p>
+                                    <p class="card-text">Description : {{ $post['description'] }}</p>
+                                    <p class="card-text">Posted : {{ $post['created_at']->diffForHumans() }}</p>
+                                    <div class="d-flex justify-content-between">
+
+                                        <a class="btn btn-success" href="{{route('edit',$post['id'])}}">Edit</a> 
+                                        <form method="post" action="{{route('destroy',$post['id'])}}" onsubmit="return confirm('Sure?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" value="Delete" class="btn btn-danger"/>
+                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
                 @endif
             </div>
         </div>

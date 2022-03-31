@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Torann\GeoIP\Facades\GeoIP;
-
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Status;
 
 class PostController extends Controller
 {
@@ -27,15 +26,41 @@ class PostController extends Controller
             ->where('word', '=', $word)
             ->where('service_type','=',$filter)
             ->orderBy('id', 'DESC')->get();
-        return view('home', ['posts' => $allpost]);
+        $statuss = Status::where('status','=','pending')->get();
+        $posts = array();
+        foreach($statuss as $status){
+            foreach($allpost as $post){
+                if($status['post_id']==$post['id']){
+                    $a = $post;
+                    break;
+                }else{
+                    $a = null;
+                }
+            }
+            array_push($posts,$a);
+        }
+        return view('home', ['posts' => $posts]);
     }
 
 
-    public function profile_show(Request $request)
+    public function profile_show($param)
     {
         $id = Auth::user()->id;
         $allpost = Post::where("user_id", '=', $id)->orderBy('id', 'DESC')->get();
-        return view('profile', ['posts' => $allpost]);
+        $statuss = Status::where('status','=',$param)->get();
+        $posts = array();
+        foreach($statuss as $status){
+            foreach($allpost as $post){
+                if($status['post_id']==$post['id']){
+                    $a = $post;
+                    break;
+                }else{
+                    $a = null;
+                }
+            }
+            array_push($posts,$a);
+        }
+        return view('profile', ['posts' => $posts]);
     }
 
     public function postdetail(Request $request, $id)
@@ -55,7 +80,10 @@ class PostController extends Controller
         $post->service_type = $request->service_type;
         $post->description = $request->description;
         $post->save();
-        return redirect()->route('profile')->with('status', 'Blog Post Form Data Has Been inserted');
+        $newstatus  = new Status;
+        $newstatus->post_id = $post->id;
+        $newstatus->save();
+        return redirect()->route('home');
     }
     public function edit(Request $request, $id)
     {
@@ -73,13 +101,13 @@ class PostController extends Controller
         $data['gender'] = $request->gender;
         $data['description'] = $request->description;
         $data->save();
-        return redirect()->route('profile');
+        return redirect()->route('profile','processing');
     }
 
     public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('profile');
+        return redirect()->route('profile','processing');
     }
 }

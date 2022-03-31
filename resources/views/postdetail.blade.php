@@ -6,15 +6,13 @@
         <div class="table-responsive-sm">
             <div class="row">
                 <div class="col-md-8 mx-auto">
+                    <form action="{{route('updatestatus',$post['id'])}}" method="POST">
+                        @csrf
                     <table class="table table-striped table-dark">
                         <tbody>
                             <tr>
-                                <th scope="row">Title : </th>
-                                <td>{{ $post['title'] }}</td>
-                            </tr>
-                            <tr>
                                 <th scope="row">Service Type : </th>
-                                <td>{{ $post['service_type'] }}</td>
+                                <td>{{App\Models\ServiceType::find($post['service_type'])['name']}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Word Number : </th>
@@ -34,6 +32,15 @@
                             </tr>
                         </tbody>
                     </table>
+                <input name="status" type="hidden" value="processing">
+                    <div class="row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-outline-success">
+                                {{ __('Provide Service') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>

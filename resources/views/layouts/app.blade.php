@@ -34,7 +34,7 @@ background-repeat: no-repeat;
 height: 100vh;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">Volunteer Network</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -42,15 +42,24 @@ height: 100vh;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (Auth::check())
-                    <a href="{{ route('addpost') }}" class="btn btn-outline-success">Add Post</a>
-                    <form class="d-flex mx-5" method="GET" action="{{ route('search') }}">
-                        <input class="form-control me-2 font-weight-bold" type="search" name="search"
-                            placeholder="Search By Title or Service Type" aria-label="Search">
-                        <button class="btn btn-outline-danger" type="submit">Search</button>
+                    @if (Auth::user()->type == 'user')
+                        <a href="{{ route('addpost') }}" class="btn btn-outline-success">Need Help ?</a>
+                    @endif
+                    <form class="d-flex mx-5" method="GET" action="{{ route('filter') }}">
+                            <select name="filter" required class="form-control">
+                                <option disabled selected>Filter By ServiceType</option>
+                                {{$services = App\Models\ServiceType::all()}}
+                                @foreach($services as $service)
+                                <option value="{{$service['id']}}">{{$service['name']}}</option>
+                                @endforeach
+                              </select>
+                        <button class="btn btn-outline-danger mx-2" type="submit">Filter</button>
                     </form>
-                    @if(Auth::user()->type == "admin")
-                    <a href="{{route('userlist')}}" class="btn btn-outline-primary mx-2">User List</a>
-                    <a href="{{route('volunteerlist')}}" class="btn btn-outline-primary">Volunteer List</a>
+                    @if (Auth::user()->type == 'admin')
+                        <a href="{{ route('userlist') }}" class="btn btn-outline-primary mx-2">User List</a>
+                        <a href="{{ route('volunteerlist') }}" class="btn btn-outline-primary">Volunteer List</a>
+                        <a href="{{ route('service') }}" class="btn btn-outline-primary">Service List</a>
+                        <a href="{{ route('word') }}" class="btn btn-outline-primary">Word List</a>
                     @endif
                 @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -85,14 +94,20 @@ height: 100vh;">
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @if (Auth::user()->type == 'volunteer')
+                                    <a class="dropdown-item" href="{{ route('volunteerprofile','processing') }}">
+
+                                        {{ __('Profile') }}
+                                    </a>
+                                    @else
                                     <a class="dropdown-item" href="{{ route('profile') }}">
 
                                         {{ __('Profile') }}
                                     </a>
-
+                                    @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
                                         @csrf

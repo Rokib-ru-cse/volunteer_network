@@ -10,14 +10,11 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -29,7 +26,6 @@
                             <div class="row mb-3">
                                 <label for="email"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                         name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -42,11 +38,23 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label 
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Gender') }}</label>
+                                <div class="col-md-6">
+                                    <select name="gender" required class="form-control">
+                                        <option disabled selected>Choose...</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="others">Others</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="user"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select Your type') }}</label>
                                 <div class="col-md-6">
                                     <select name="type" required id="user" class="form-select" aria-label="Default select example">
-                                        <option selected>Select Your type</option>
+                                        <option selected>Choose...</option>
                                         <option value="user">User</option>
                                         <option value="volunteer">Volunteer</option>
                                     </select>
@@ -56,12 +64,13 @@
                                 <label for="word"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select Your Word Number') }}</label>
                                 <div class="col-md-6">
-                                    <select name="word" required id="word" class="form-select" aria-label="Default select example">
-                                        <option selected>Select Your Word Number</option>
-                                        @for ($i = 1; $i <= 30; $i++)
-                                            <option value="{{ $i }}">{{$i}}</option>
-                                        @endfor
-                                    </select>
+                                    <select name="word" required class="form-control">
+                                        <option disabled selected>Choose...</option>
+                                        {{$words = App\Models\Word::all()}}
+                                        @foreach($words as $word)
+                                        <option value="{{$word['id']}}">{{$word['word_no']}}</option>
+                                        @endforeach
+                                      </select>
                                 </div>
                             </div>
                             <div class="row mb-3">

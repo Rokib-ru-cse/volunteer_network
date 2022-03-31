@@ -16,7 +16,8 @@
                         <div class="d-flex justify-content-between mt-2">
                             <a class="btn btn-outline-success" href="{{ route('postdetail', $post['id']) }}">See
                                 Details</a>
-                                <p>Status : {{App\Models\Status::where('post_id','=', $post->id)->get()[0]->status}}</p>
+                                <p>Status : {{App\Models\Status::where('post_id','=',$post->id)->get()[0]->status}}</p>
+
                         </div>
                         @if (Auth::user()->type == 'admin')
                             <div class="d-flex justify-content-between mt-2">

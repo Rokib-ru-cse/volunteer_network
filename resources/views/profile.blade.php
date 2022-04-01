@@ -45,8 +45,6 @@
                                     class="btn btn-outline-dark">Processing</a>
                                 <a href="{{ route('profile', 'completed') }}"
                                     class="btn btn-outline-dark">Completed</a>
-                                <a href="{{ route('profile', 'rejected') }}"
-                                    class="btn btn-outline-dark">Rejected</a>
                             </div>
                         </div>
                         @foreach ($posts as $post)

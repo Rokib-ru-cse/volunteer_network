@@ -6,8 +6,11 @@
 
         <div class="w-50 mx-auto py-5">
             @foreach ($posts as $post)
+            @if($post!=null)
                 <div class="card mb-3">
                     <div class="card-header" style="background: #55efc4">
+                        {{-- {{dd($post)}} --}}
+                        {{-- {{dd(App\Models\ServiceType::find($post['service_type']))}} --}}
                         Service Type : {{ App\Models\ServiceType::find($post['service_type'])['name']}}
                     </div>
                     <div class="card-body" style="background: #e3f2fd">
@@ -16,7 +19,10 @@
                         <div class="d-flex justify-content-between mt-2">
                             <a class="btn btn-outline-success" href="{{ route('postdetail', $post['id']) }}">See
                                 Details</a>
-                                <p>Status : {{App\Models\Status::where('post_id','=', $post->id)->get()[0]->status}}</p>
+                                @php
+                                 $status =  App\Models\Status::where('post_id','=', $post->id)->get()[0]->status;  
+                                @endphp
+                                <p>Status : {{$status=='rejected'?'pending':$status}}</p>
                         </div>
                         @if (Auth::user()->type == 'admin')
                             <div class="d-flex justify-content-between mt-2">
@@ -32,6 +38,7 @@
                         @endif
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
 

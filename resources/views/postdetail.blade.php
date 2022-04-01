@@ -21,12 +21,24 @@
                                 <td>{{ $post['word'] }}</td>
                             </tr>
                             <tr>
+                                <th scope="row">User Name : </th>
+                                <td>{{App\Models\User::find($post['user_id'])['name']}}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row">User Email : </th>
                                 <td>{{ $post['email'] }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">User Phone Number : </th>
                                 <td>{{ $post['phone'] }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Expected Gender : </th>
+                                <td>{{ $post['gender']=='others'?'Any':$post['gender'] }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">User Address : </th>
+                                <td>{{ $post['address'] }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Description : </th>

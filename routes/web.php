@@ -48,12 +48,8 @@ Route::post('/postdetails/{id}', [StatusController::class, 'updatestatus'])->nam
 //!status route
 
 //volunteer route
-
 Route::get('/volunteerprofile/{param}', [VolunteerController::class, 'profile_show'])->name('volunteerprofile');
-
 //!volunteer route
-
-
 
 
 Route::delete('/profile/{id}', [PostController::class, 'destroy'])->name('destroy');
@@ -70,6 +66,8 @@ Route::delete('/xxxx/{id}', [UserController::class, 'deleteuser'])->name('delete
 Route::get('/userlist/{id}', [UserController::class, 'userposts'])->name('userposts');
 Route::get('/volunteerlist/{id}', [UserController::class, 'volunteerposts'])->name('volunteerposts');
 
-
+//admin route
+Route::get('/adminservices/{id}/{param}', [UserController::class, 'adminservices'])->name('adminservices');
+//!admin route
 
 

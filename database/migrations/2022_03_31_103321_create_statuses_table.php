@@ -19,7 +19,7 @@ class CreateStatusesTable extends Migration
             $table->bigInteger('post_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->bigInteger('assigned_to')->unsigned()->nullable();
-            $table->foreign('assigned_to')->references('id')->on('users');
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

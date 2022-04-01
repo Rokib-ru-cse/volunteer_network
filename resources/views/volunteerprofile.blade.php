@@ -100,54 +100,54 @@
 
 
         {{--! volunteer service type section --}}
-                <div class="container" style="padding-bottom: 100px">
-                    <div class="w-50 mx-auto ">
-                        <h1 class="my-3 text-center">Services You Are giving</h1>
-                        <div class="row">
-                            <div class="col-md-8 offset-2 d-flex justify-content-between">
-                                <a href="{{ route('volunteerprofile', 'processing') }}"
-                                    class="btn btn-outline-dark">Processing</a>
-                                <a href="{{ route('volunteerprofile', 'completed') }}"
-                                    class="btn btn-outline-dark">Completed</a>
-                                <a href="{{ route('volunteerprofile', 'rejected') }}"
-                                    class="btn btn-outline-dark">Rejected</a>
-                            </div>
-                        </div>
-                        @foreach ($posts as $post)
-                            <div class="card my-3">
-                                <div class="card-header">
-                                    <h5 class="card-title">Service Type :
-                                        {{ App\Models\ServiceType::find($post['service_type'])['name'] }}</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Word Number : {{ $post['word'] }}</p>
-                                    <p class="card-text">Email : {{ $post['email'] }}</p>
-                                    <p class="card-text">Description : {{ $post['description'] }}</p>
-                                    <p class="card-text">Posted : {{ $post['created_at']->diffForHumans() }}</p>
-                                    @php
-                                        $status = App\Models\Status::select('status')
-                                            ->where('post_id', '=', $post->id)
-                                            ->get();
-                                    @endphp
-                                    @if ($status[0]->status == 'processing')
-                                        <form action="{{ route('updatestatus', $post['id']) }}" method="POST">
-                                            @csrf
-                                            <div class="d-flex justify-content-between">
-                                                <label class="">Complete or Reject ? </label>
-                                                <select class="border border-info rounded" name="status" required>
-                                                    <option disabled selected>Choose...</option>
-                                                    <option value="completed">Completed</option>
-                                                    <option value="rejected">Rejected</option>
-                                                </select>
-                                                <button type="submit" class="btn btn-outline-primary">Update
-                                                    Service</button>
-                                            </div>
-                                        </form>
-                                    @endif
-
-                                </div>
-                            </div>
-                        @endforeach
+        <div class="container" style="padding-bottom: 100px">
+            <div class="w-50 mx-auto ">
+                <h1 class="my-3 text-center">Services You Are giving</h1>
+                <div class="row">
+                    <div class="col-md-8 offset-2 d-flex justify-content-between">
+                        <a href="{{ route('volunteerprofile', 'processing') }}"
+                            class="btn btn-outline-dark">Processing</a>
+                        <a href="{{ route('volunteerprofile', 'completed') }}"
+                            class="btn btn-outline-dark">Completed</a>
+                        <a href="{{ route('volunteerprofile', 'rejected') }}"
+                            class="btn btn-outline-dark">Rejected</a>
                     </div>
                 </div>
+                @foreach ($posts as $post)
+                    <div class="card my-3">
+                        <div class="card-header">
+                            <h5 class="card-title">Service Type :
+                                {{ App\Models\ServiceType::find($post['service_type'])['name'] }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Word Number : {{ $post['word'] }}</p>
+                            <p class="card-text">Email : {{ $post['email'] }}</p>
+                            <p class="card-text">Description : {{ $post['description'] }}</p>
+                            <p class="card-text">Posted : {{ $post['created_at']->diffForHumans() }}</p>
+                            @php
+                                $status = App\Models\Status::select('status')
+                                    ->where('post_id', '=', $post->id)
+                                    ->get();
+                            @endphp
+                            @if ($status[0]->status == 'processing')
+                                <form action="{{ route('updatestatus', $post['id']) }}" method="POST">
+                                    @csrf
+                                    <div class="d-flex justify-content-between">
+                                        <label class="">Complete or Reject ? </label>
+                                        <select class="border border-info rounded" name="status" required>
+                                            <option disabled selected>Choose...</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="rejected">Rejected</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-outline-primary">Update
+                                            Service</button>
+                                    </div>
+                                </form>
+                            @endif
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     @endsection

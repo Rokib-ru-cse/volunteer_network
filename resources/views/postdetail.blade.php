@@ -57,8 +57,8 @@
                          </form>
                     </div>
                     @else
-
                     <input name="status" type="hidden" value="processing">
+                    @if(Auth::user()->type=='volunteer')
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-outline-success">
@@ -66,6 +66,7 @@
                                 </button>
                             </div>
                         </div>
+                        @endif
                     </form>
                     @endif
                 </div>

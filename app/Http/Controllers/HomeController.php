@@ -31,66 +31,67 @@ class HomeController extends Controller
     {
         if (Auth::user()->type == "admin") {
             $allpost = Post::orderBy('id', 'DESC')->get();
-            $posts = array_reverse($allpost);
-            return view('home', ['posts' => $posts]);
+            return view('home', ['posts' => $allpost]);
         }
         if (Auth::user()->type == "volunteer") {
             $word = Auth::user()->word;
-            $service_types = VolunteerService::where('user_id','=',Auth::user()->id)->get();
-            $allpost = Post::where('gender','=','any')
-                        ->orwhere('gender','=',Auth::user()->gender)
-                        ->where("word", '=', $word)->orderBy('id', 'DESC')->get();
-            $statuss = Status::where('status','=','pending')
-                    ->orwhere('status','=','rejected')
-                    ->where('assigned_to','!=',Auth::user()->id)->get();
+            $service_types = VolunteerService::where('user_id', '=', Auth::user()->id)->get();
+            $allpost = Post::where('gender', '=', 'any')
+                ->orwhere('gender', '=', Auth::user()->gender)
+                ->where("word", '=', $word)->orderBy('id', 'DESC')->get();
+            $statuss = Status::where('status', '=', 'pending')
+                ->orwhere('status', '=', 'rejected')
+                ->where('assigned_to', '!=', Auth::user()->id)->get();
             $newallposts = array();
             $a = null;
-            foreach($service_types as $service_type){
-                foreach($allpost as $post){
-                    if($service_type['service_type']==$post['service_type']){
+            foreach ($allpost as $post) {
+                foreach ($service_types as $service_type) {
+                    if ($service_type['service_type'] == $post['service_type']) {
                         $a = $post;
                         break;
-                    }else{
+                    } else {
                         $a = null;
                     }
                 }
-                if($a!=null){
-                    array_push($newallposts,$a);
+                if ($a != null) {
+                    array_push($newallposts, $a);
                 }
             }
             $posts = array();
-            foreach($statuss as $status){
-                foreach($newallposts as $post){
-                    if($status['post_id']==$post['id']){
+            $a=null;
+            foreach ($newallposts as $post) {
+                foreach ($statuss as $status) {
+                    if ($status['post_id'] == $post['id']) {
                         $a = $post;
                         break;
-                    }else{
+                    } else {
                         $a = null;
                     }
                 }
-                array_push($posts,$a);
+                array_push($posts, $a);
             }
             $posts = array_reverse($posts);
             return view('home', ['posts' => $posts]);
         }
-
-        $word = Auth::user()->word;
-        $allpost = Post::where("word", '=', $word)->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status','=','pending')
-                    ->orwhere('status','=','rejected')->get();
-        $posts = array();
-        foreach($statuss as $status){
-            foreach($allpost as $post){
-                if($status['post_id']==$post['id']){
-                    $a = $post;
-                    break;
-                }else{
-                    $a = null;
+        if (Auth::user()->type == "user") {
+            $word = Auth::user()->word;
+            $allpost = Post::where("word", '=', $word)->orderBy('id', 'DESC')->get();
+            $statuss = Status::where('status', '=', 'pending')
+                ->orwhere('status', '=', 'rejected')->get();
+            $posts = array();
+            foreach ($allpost as $post) {
+                foreach ($statuss as $status) {
+                    if ($status['post_id'] == $post['id']) {
+                        $a = $post;
+                        break;
+                    } else {
+                        $a = null;
+                    }
                 }
+                array_push($posts, $a);
             }
-            array_push($posts,$a);
+            $posts = array_reverse($posts);
+            return view('home', ['posts' => $posts]);
         }
-        $posts = array_reverse($posts);
-        return view('home', ['posts' => $posts]);
     }
 }

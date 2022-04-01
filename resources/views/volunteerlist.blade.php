@@ -13,7 +13,6 @@
                         <th scope="col">Phone</th>
                         <th scope="col">Created</th>
                         <th scope="col">Delete</th>
-                        <th scope="col">Volunteer Total Posts</th>
                         <th scope="col">Volunteer Posts</th>
                     </tr>
                 </thead>
@@ -34,7 +33,6 @@
                                     <input type="submit" value="Delete volunteer" class="btn btn-outline-danger" />
                                 </form>
                             </td>
-                            <td>{{App\Models\Post::where('user_id','=',$volunteer['id'])->get()->count()}}</td>
                             <td><a href="{{route('volunteerposts',$volunteer['id'])}}" class="btn btn-outline-success">View Posts</a></td>
                         </tr>
                     @endforeach

@@ -21,8 +21,7 @@ class PostController extends Controller
         if (Auth::user()->type == "admin") {
             $allpost = Post::where('service_type','=',$filter)
                             ->orderBy('id', 'DESC')->get();
-                            $posts = array_reverse($allpost);
-            return view('home', ['posts' => $posts]);
+            return view('home', ['posts' => $allpost]);
         }
         if (Auth::user()->type == "volunteer") {
             $service_types = VolunteerService::where('user_id','=',Auth::user()->id)->get();
@@ -37,8 +36,8 @@ class PostController extends Controller
         
         $newallposts = array();
         $a = null;
-        foreach($service_types as $service_type){
-            foreach($allpost as $post){
+        foreach($allpost as $post){
+            foreach($service_types as $service_type){
                 if($service_type['service_type']==$post['service_type']){
                     $a = $post;
                     break;
@@ -52,8 +51,8 @@ class PostController extends Controller
         }
         $a = null;
         $posts = array();
-        foreach($statuss as $status){
-            foreach($newallposts as $post){
+        foreach($newallposts as $post){
+            foreach($statuss as $status){
                 if($status['post_id']==$post['id']){
                     $a = $post;
                     break;
@@ -74,8 +73,8 @@ class PostController extends Controller
         $statuss = Status::where('status','=','pending')->get();
         $posts = array();
         $a=null;
-        foreach($statuss as $status){
-            foreach($allpost as $post){
+        foreach($allpost as $post){
+            foreach($statuss as $status){
                 if($status['post_id']==$post['id']){
                     $a = $post;
                     break;
@@ -96,8 +95,8 @@ class PostController extends Controller
         $allpost = Post::where("user_id", '=', $id)->orderBy('id', 'DESC')->get();
         $statuss = Status::where('status','=',$param)->get();
         $posts = array();
-        foreach($statuss as $status){
-            foreach($allpost as $post){
+        foreach($allpost as $post){
+            foreach($statuss as $status){
                 if($status['post_id']==$post['id']){
                     $a = $post;
                     break;

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\VolunteerServiceController;
 use App\Http\Controllers\WordController;
 
 Route::get('/', function () {
@@ -36,6 +37,11 @@ Route::delete('/word/{id}', [WordController::class, 'destroyword'])->name('destr
 Route::get('/word/{id}', [WordController::class, 'editword'])->name('editword');
 Route::post('/word/{id}', [WordController::class, 'eword'])->name('editword');
 //! word route
+
+// volunteer service types route
+Route::post('/volunteer_service_type', [VolunteerServiceController::class, 'addvolunteer_service_type'])->name('volunteer_service_type');
+Route::delete('/volunteer_service_type/{id}', [VolunteerServiceController::class, 'destroy_volunteer_service_type'])->name('destroy_volunteer_service_type');
+//! volunteer service types  route
 
 //status route
 Route::post('/postdetails/{id}', [StatusController::class, 'updatestatus'])->name('updatestatus');

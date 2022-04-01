@@ -33,11 +33,76 @@
                 </tbody>
             </table>
         </div>
-        <div class="container">
-            <div class="w-50 mx-auto">
-                <div class="container">
-                    <div class="mx-auto">
-                        <h1>Services You Are giving</h1>
+        {{-- volunteer service type section --}}
+       
+    <div class="container text-center mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <form action="{{ route('volunteer_service_type') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <h4 class="pb-2">Please Add Service Types you are giving</h4>
+                        <div class="row mb-3">
+                            <label for="service_type"
+                                class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
+                            <div class="col-md-6">
+                                <select name="service_type" required class="form-control">
+                                    <option disabled selected>Choose...</option>
+                                    {{$services = App\Models\ServiceType::all()}}
+                                    @foreach($services as $service)
+                                    <option value="{{$service['id']}}">{{$service['name']}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+                        </div>
+                </div>
+                <button type="submit" class="mt-3 btn btn-outline-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 offset-3">
+                <h4 class="pb-2">Types of Service you are giving</h4>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Service Type</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $i=1;
+                        @endphp
+                        @foreach ($volunteer_service_types as $volunteer_service_type)
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td>{{App\Models\ServiceType::find($volunteer_service_type['service_type'])['name'] }}</td>
+                                <td>
+                                    <form method="post" action="{{ route('destroy_volunteer_service_type', $volunteer_service_type['id']) }}"
+                                        onsubmit="return confirm('Sure?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                                    </form>
+                                </td>
+                            </tr>
+                            @php
+                            $i++;
+                            @endphp
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+        {{--! volunteer service type section --}}
+                <div class="container" style="padding-bottom: 100px">
+                    <div class="w-50 mx-auto ">
+                        <h1 class="my-3 text-center">Services You Are giving</h1>
                         <div class="row">
                             <div class="col-md-8 offset-2 d-flex justify-content-between">
                                 <a href="{{ route('volunteerprofile', 'processing') }}"
@@ -83,9 +148,6 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
-            </div>
-        </div>
     @endsection

@@ -63,11 +63,12 @@ Route::get('/filter', [PostController::class, 'filter'])->name('filter');
 Route::get('/userlist', [UserController::class, 'userlist'])->name('userlist');
 Route::get('/volunteerlist', [UserController::class, 'volunteerlist'])->name('volunteerlist');
 Route::delete('/xxxx/{id}', [UserController::class, 'deleteuser'])->name('deleteuser');
-Route::get('/userlist/{id}', [UserController::class, 'userposts'])->name('userposts');
+Route::get('/userlist/userposts/{id}', [UserController::class, 'userposts'])->name('userposts');
 Route::get('/volunteerlist/{id}', [UserController::class, 'volunteerposts'])->name('volunteerposts');
 
 //admin route
 Route::get('/adminservices/{id}/{param}', [UserController::class, 'adminservices'])->name('adminservices');
+Route::get('/userlist/{id}', [UserController::class, 'userdetails'])->name('userdetails');
 //!admin route
 
 

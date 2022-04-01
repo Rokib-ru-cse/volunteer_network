@@ -5,7 +5,7 @@
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Word</th>
@@ -17,10 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($users as $user)
                         <tr>
-                            <th scope="row">{{ $user['id'] }}</th>
-                            <td>{{ $user['name'] }}</td>
+                            <th scope="row">{{ $i }}</th>
+                            <td><a href="{{ route('userdetails', $user['id']) }}">{{ $user['name'] }}</a></td>
                             <td>{{ $user['email'] }}</td>
                             <td>{{ $user['word'] }}</td>
                             <td>{{ $user['phone'] }}</td>
@@ -33,9 +36,13 @@
                                     <input type="submit" value="Delete User" class="btn btn-outline-danger" />
                                 </form>
                             </td>
-                            <td>{{App\Models\Post::where('user_id','=',$user['id'])->get()->count()}}</td>
-                            <td><a href="{{route('userposts',$user['id'])}}" class="btn btn-outline-success">View Posts</a></td>
+                            <td>{{ App\Models\Post::where('user_id', '=', $user['id'])->get()->count() }}</td>
+                            <td><a href="{{ route('userposts', $user['id']) }}" class="btn btn-outline-success">View Posts</a>
+                            </td>
                         </tr>
+                        @php
+                            $i++;
+                        @endphp
                     @endforeach
                 </tbody>
             </table>

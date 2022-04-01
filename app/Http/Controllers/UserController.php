@@ -103,4 +103,10 @@ class UserController extends Controller
             return view('userservicerelated', ['id' => $id, 'posts' => $posts]);
         }
     }
+
+    public function userdetails($id)
+    {
+        $user = User::find($id);
+        return view('userdetails', ['user' => $user]);
+    }
 }

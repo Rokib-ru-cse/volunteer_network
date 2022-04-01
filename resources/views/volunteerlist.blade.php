@@ -6,7 +6,7 @@
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Word</th>
@@ -17,10 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($volunteers as $volunteer)
                         <tr>
-                            <th scope="row">{{ $volunteer['id'] }}</th>
-                            <td>{{ $volunteer['name'] }}</td>
+                            <th scope="row">{{ $i }}</th>
+                            <td><a href="{{ route('userdetails', $volunteer['id']) }}">{{ $volunteer['name'] }}</a></td>
                             <td>{{ $volunteer['email'] }}</td>
                             <td>{{ $volunteer['word'] }}</td>
                             <td>{{ $volunteer['phone'] }}</td>
@@ -33,8 +36,12 @@
                                     <input type="submit" value="Delete volunteer" class="btn btn-outline-danger" />
                                 </form>
                             </td>
-                            <td><a href="{{route('volunteerposts',$volunteer['id'])}}" class="btn btn-outline-success">View Posts</a></td>
+                            <td><a href="{{ route('volunteerposts', $volunteer['id']) }}" class="btn btn-outline-success">View
+                                    Posts</a></td>
                         </tr>
+                        @php
+                            $i++;
+                        @endphp
                     @endforeach
                 </tbody>
             </table>

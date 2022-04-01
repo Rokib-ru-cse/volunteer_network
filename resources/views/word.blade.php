@@ -29,16 +29,19 @@
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">No</th>
                             <th scope="col">Word Number</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $i = 1;
+                        @endphp
                         @foreach ($words as $word)
                             <tr>
-                                <td>{{ $word['id'] }}</td>
+                                <td>{{ $i }}</td>
                                 <td>{{ $word['word_no'] }}</td>
                                 <td><a href="{{ route('editword', $word['id']) }}"
                                         class="btn btn-outline-success">Edit</a></td>
@@ -51,6 +54,9 @@
                                     </form>
                                 </td>
                             </tr>
+                            @php
+                                $i++;
+                            @endphp
                         @endforeach
                     </tbody>
                 </table>

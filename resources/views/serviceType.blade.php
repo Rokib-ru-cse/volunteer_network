@@ -16,7 +16,8 @@
                         <input type="text" value="{{ $editservice['name'] }}" name="service" class="mt-2 form-control"
                             placeholder="Enter sesson ex. 2000-2001">
                     @else
-                        <input type="text" name="service" class="mt-2 form-control" placeholder="Add service ex. খাবার প্রস্তুতি">
+                        <input type="text" name="service" class="mt-2 form-control"
+                            placeholder="Add service ex. খাবার প্রস্তুতি">
                     @endif
                 </div>
                 <button type="submit" class="mt-3 btn btn-outline-primary">Submit</button>
@@ -29,16 +30,19 @@
                 <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">No</th>
                             <th scope="col">Name</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $i = 1;
+                        @endphp
                         @foreach ($services as $service)
                             <tr>
-                                <td>{{ $service['id'] }}</td>
+                                <td>{{ $i }}</td>
                                 <td>{{ $service['name'] }}</td>
                                 <td><a href="{{ route('editservice', $service['id']) }}"
                                         class="btn btn-outline-success">Edit</a></td>
@@ -51,6 +55,9 @@
                                     </form>
                                 </td>
                             </tr>
+                            @php
+                            $i++;
+                        @endphp
                         @endforeach
                     </tbody>
                 </table>

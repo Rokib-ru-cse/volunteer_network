@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,24 +16,57 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volunteer Network</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Styles -->
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+
+<body style="background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+height: 100vh;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">Volunteer Network</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="{{route('addpost')}}" class="btn btn-success">Add Post</a>
+                @if (Auth::check())
+                    @if (Auth::user()->type == 'user')
+                        <a href="{{ route('addpost') }}" class="btn btn-outline-success">Need Help ?</a>
+                    @endif
+                    <form class="d-flex mx-5" method="GET" action="{{ route('filter') }}">
+                            <select name="filter" required class="form-control">
+                                <option disabled selected>Filter By ServiceType</option>
+                                {{$services = App\Models\ServiceType::all()}}
+                                @foreach($services as $service)
+                                <option value="{{$service['id']}}">{{$service['name']}}</option>
+                                @endforeach
+                              </select>
+                        <button class="btn btn-outline-danger mx-2" type="submit">Filter</button>
+                    </form>
+                    @if (Auth::user()->type == 'admin')
+                        <a href="{{ route('userlist') }}" class="btn btn-outline-primary mx-2">User List</a>
+                        <a href="{{ route('volunteerlist') }}" class="btn btn-outline-primary">Volunteer List</a>
+                        <a href="{{ route('service') }}" class="btn btn-outline-primary">Service List</a>
+                        <a href="{{ route('word') }}" class="btn btn-outline-primary">Word List</a>
+                    @endif
+                @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -40,33 +74,42 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link font-weight-bold"
+                                        href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link font-weight-bold"
+                                        href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
-                                       
+                                    @if (Auth::user()->type == 'volunteer')
+                                    <a class="dropdown-item" href="{{ route('volunteerprofile','processing') }}">
+
                                         {{ __('Profile') }}
                                     </a>
+                                    @else
+                                    <a class="dropdown-item" href="{{  route('profile','processing') }}">
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    @endif
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -77,9 +120,10 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
 </body>
+
 </html>

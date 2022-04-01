@@ -48,6 +48,7 @@
                             </div>
                         </div>
                         @foreach ($posts as $post)
+                        @if($post!=null)
                             <div class="card my-3">
                                 <div class="card-header">
                                     <h5 class="card-title">Service Type :
@@ -69,6 +70,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
 
                     </div>

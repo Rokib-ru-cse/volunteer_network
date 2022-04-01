@@ -95,6 +95,7 @@ class PostController extends Controller
         $allpost = Post::where("user_id", '=', $id)->orderBy('id', 'DESC')->get();
         $statuss = Status::where('status','=',$param)->get();
         $posts = array();
+        $a = null;
         foreach($allpost as $post){
             foreach($statuss as $status){
                 if($status['post_id']==$post['id']){
@@ -104,7 +105,9 @@ class PostController extends Controller
                     $a = null;
                 }
             }
-            array_push($posts,$a);
+            if($a!=null){
+                array_push($posts,$a);
+            }
         }
         $posts = array_reverse($posts);
         return view('profile', ['posts' => $posts]);

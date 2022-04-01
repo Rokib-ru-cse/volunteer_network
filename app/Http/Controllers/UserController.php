@@ -42,7 +42,7 @@ class UserController extends Controller
     {
 
         $allpost = Post::where('user_id', '=', $id)->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status', '=', 'processing')->get();
+        $statuss = Status::where('status', '=', 'pending')->get();
         $newallposts = array();
         $a = null;
         foreach ($allpost as $post) {

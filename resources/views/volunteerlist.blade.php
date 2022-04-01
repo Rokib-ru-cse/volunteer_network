@@ -13,7 +13,7 @@
                         <th scope="col">Phone</th>
                         <th scope="col">Created</th>
                         <th scope="col">Delete</th>
-                        <th scope="col">Volunteer Posts</th>
+                        <th scope="col">Volunteers giving services</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -5,10 +5,10 @@
             <h1 class="py-3 text-center">Users Services</h1>
             <div class="row">
                 <div class="col-md-8 offset-2 d-flex justify-content-between">
-                    {{-- @if (User::find($id)->type == 'user')
+                    @if (App\Models\User::find($id)->type == 'user')
                         <a href="{{ route('adminservices', [$id, 'pending']) }}"
                             class="btn btn-outline-dark">Pending</a>
-                    @endif --}}
+                    @endif
                     <a href="{{ route('adminservices', [$id, 'processing']) }}" class="btn btn-outline-dark">Processing</a>
                     <a href="{{ route('adminservices', [$id, 'completed']) }}" class="btn btn-outline-dark">Completed</a>
                     <a href="{{ route('adminservices', [$id, 'rejected']) }}" class="btn btn-outline-dark">Rejected</a>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid ">
+    <div class="container-fluid" style="background: rgb(96, 233, 243,.5);height:1000px">
         <div class="py-5">
             <table class="table table-striped table-dark">
                 <thead>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container text-center mt-4">
+    <div class="container-fluid text-center pt-5" style="background: rgb(96, 233, 243,.5);height:1000px">
         <div class="row">
             <div class="col-md-6 offset-3">
                 @if ($editservice != null)

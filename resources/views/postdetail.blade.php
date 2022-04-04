@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid py-5"
-        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:100vh">
+        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:1000px">
         <div class="table-responsive-sm">
             <div class="row">
                 <div class="col-md-8 mx-auto">
@@ -46,17 +46,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    @if(Auth::User()->type=='user')
-                    <div class="d-flex justify-content-between">
-
-                        <a class="btn btn-success" href="{{route('edit',$post['id'])}}">Edit</a> 
-                        <form method="post" action="{{route('destroy',$post['id'])}}" onsubmit="return confirm('Sure?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" value="Delete" class="btn btn-danger"/>
-                         </form>
-                    </div>
-                    @else
                     <input name="status" type="hidden" value="processing">
                     @if(Auth::user()->type=='volunteer')
                         <div class="row mb-0">
@@ -66,7 +55,6 @@
                                 </button>
                             </div>
                         </div>
-                        @endif
                     </form>
                     @endif
                 </div>

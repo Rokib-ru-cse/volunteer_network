@@ -58,7 +58,7 @@ class HomeController extends Controller
                 }
             }
             $posts = array();
-            $a=null;
+            $a = null;
             foreach ($newallposts as $post) {
                 foreach ($statuss as $status) {
                     if ($status['post_id'] == $post['id']) {
@@ -68,7 +68,9 @@ class HomeController extends Controller
                         $a = null;
                     }
                 }
-                array_push($posts, $a);
+                if($a!=null){
+                    array_push($posts, $a);
+                }
             }
             $posts = array_reverse($posts);
             return view('home', ['posts' => $posts]);
@@ -79,6 +81,7 @@ class HomeController extends Controller
             $statuss = Status::where('status', '=', 'pending')
                 ->orwhere('status', '=', 'rejected')->get();
             $posts = array();
+            $a = null;
             foreach ($allpost as $post) {
                 foreach ($statuss as $status) {
                     if ($status['post_id'] == $post['id']) {
@@ -88,7 +91,9 @@ class HomeController extends Controller
                         $a = null;
                     }
                 }
-                array_push($posts, $a);
+                if ($a != null) {
+                    array_push($posts, $a);
+                }
             }
             $posts = array_reverse($posts);
             return view('home', ['posts' => $posts]);

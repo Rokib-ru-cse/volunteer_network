@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid bg-info" style="padding-bottom: 100px">
+    <div class="container-fluid" style="background: rgba(96, 155, 243, 0.3); padding-bottom: 100px;height:1000px">
         <div class="w-50 mx-auto ">
             <h1 class="py-3 text-center">Users Services</h1>
             <div class="row">

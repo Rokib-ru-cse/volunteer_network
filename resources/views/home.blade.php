@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="container-fluid "
-        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%)">
+        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:1000px">
 
         <div class="w-50 mx-auto py-5">
+            @if (count($posts) == 0)
+                <h1 class="fw-bold font-monospace text-danger text-center">No Post Found </h1>
+            @endif
             @foreach ($posts as $post)
-            @if($post!=null)
                 <div class="card mb-3">
                     <div class="card-header" style="background: #55efc4">
-                        {{-- {{dd($post)}} --}}
-                        {{-- {{dd(App\Models\ServiceType::find($post['service_type']))}} --}}
-                        Service Type : {{ App\Models\ServiceType::find($post['service_type'])['name']}}
+                        Service Type : {{ App\Models\ServiceType::find($post['service_type'])['name'] }}
                     </div>
                     <div class="card-body" style="background: #e3f2fd">
                         <p class="card-text">Word Number : {{ $post['word'] }}</p>
@@ -19,10 +19,10 @@
                         <div class="d-flex justify-content-between mt-2">
                             <a class="btn btn-outline-success" href="{{ route('postdetail', $post['id']) }}">See
                                 Details</a>
-                                @php
-                                 $status =  App\Models\Status::where('post_id','=', $post->id)->get()[0]->status;  
-                                @endphp
-                                <p>Status : {{$status=='rejected'?'pending':$status}}</p>
+                            @php
+                                $status = App\Models\Status::where('post_id', '=', $post->id)->get()[0]->status;
+                            @endphp
+                            <p>Status : {{ $status == 'rejected' ? 'pending' : $status }}</p>
                         </div>
                         @if (Auth::user()->type == 'admin')
                             <div class="d-flex justify-content-between mt-2">
@@ -38,7 +38,6 @@
                         @endif
                     </div>
                 </div>
-                @endif
             @endforeach
         </div>
 

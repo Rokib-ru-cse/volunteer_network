@@ -60,7 +60,9 @@ class PostController extends Controller
                     $a = null;
                 }
             }
-            array_push($posts,$a);
+            if($a!=null){
+                array_push($posts,$a);
+            }
         }
         $posts = array_reverse($posts);
         return view('home', ['posts' => $posts]);
@@ -82,7 +84,9 @@ class PostController extends Controller
                     $a = null;
                 }
             }
-            array_push($posts,$a);
+            if($a!=null){
+                array_push($posts,$a);
+            }
         }
         $posts = array_reverse($posts);
         return view('home', ['posts' => $posts]);
@@ -143,7 +147,6 @@ class PostController extends Controller
     }
     public function editpost(Request $request, $id)
     {
-
         $data = Post::find($id);
         $data['email'] = $request->email;
         $data['phone'] = $request->phone;
@@ -155,11 +158,15 @@ class PostController extends Controller
         $data->save();
         return redirect()->route('profile','processing');
     }
-
     public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('profile','processing');
+        if(Auth::user()->type == "admin"){
+            return redirect()->route('home');
+        }
+        if(Auth::user()->type == "user"){
+            return redirect()->route('profile','processing');
+        }
     }
 }

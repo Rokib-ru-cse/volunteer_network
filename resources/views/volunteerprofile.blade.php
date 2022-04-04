@@ -35,7 +35,7 @@
         </div>
         {{-- volunteer service type section --}}
 
-        <div class="container text-center mt-4" style="height:2000px">
+        <div class="container text-center mt-4">
             <div class="row">
                 <div class="col-md-6 offset-3">
                     <form action="{{ route('volunteer_service_type') }}" method="post">

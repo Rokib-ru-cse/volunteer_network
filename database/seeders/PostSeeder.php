@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class PostSeeder extends Seeder
 {

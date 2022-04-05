@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid py-5" style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);">
+    <div class="container-fluid py-5" style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:1000px">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -11,11 +11,11 @@
                         <form method="POST" action="{{route('editpost',$post['id'])}}">
                             @csrf
                             <div class="row mb-3">
-                                <label for="service_type"
+                                <label for="service_type_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
                                 <div class="col-md-6">
-                                    <select name="service_type" required class="form-control">
-                                        <option selected value="{{$post['service_type']}}">{{App\Models\ServiceType::find($post['service_type'])['name']}}</option>
+                                    <select name="service_type_id" required class="form-control">
+                                        <option selected value="{{$post['service_type_id']}}">{{App\Models\ServiceType::find($post['service_type_id'])['name']}}</option>
                                         {{$services = App\Models\ServiceType::all()}}
                                         @foreach($services as $service)
                                         <option value="{{$service['id']}}">{{$service['name']}}</option>
@@ -39,22 +39,21 @@
                                     @enderror
                                 </div>
                             </div>
-                            
                             <div class="row mb-3">
-                                <label for="word"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Word Number') }}</label>
+                                <label for="location"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Location') }}</label>
                                 <div class="col-md-6">
-                                    <select name="word" required class="form-control">
-                                        <option selected value="{{$post['word']}}">{{App\Models\Word::find($post['word'])['word_no']}}</option>
-                                        {{$words = App\Models\Word::all()}}
-                                        @foreach($words as $word)
-                                        <option value="{{$word['id']}}">{{$word['word_no']}}</option>
+                                    <select name="location_id" required class="form-control">
+                                        <option selected value="{{$post['location_id']}}">{{App\Models\Location::find($post['location_id'])['location']}}</option>
+                                        {{$locations = App\Models\Location::all()}}
+                                        @foreach($locations as $location)
+                                        <option value="{{$location['id']}}">{{$location['location']}}</option>
                                         @endforeach
                                       </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label 
+                                <label
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select Your Expected Gender') }}</label>
                                 <div class="col-md-6">
                                     <select name="gender" required class="form-control">
@@ -74,6 +73,16 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                    <label for="current_location"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Update Your Current Location') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input required type="hidden" value="{{ $post['latitude'] }}" name="latitude" id="latitude">
+                                        <input required type="hidden" value="{{ $post['longitude'] }}" name="longitude" id="longitude">
+                                        <button id="lbtn" required onclick="getLocation()" class="btn btn-outline-success">Click Here</button>
+                                    </div>
+                                </div>
+                            <div class="row mb-3">
                                 <label for="address"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
                                 <div class="col-md-6">
@@ -84,7 +93,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <textarea class="form-control" name="description" required autofocus>{{ $post['description'] }}</textarea> 
+                                    <textarea class="form-control" name="description" required autofocus>{{ $post['description'] }}</textarea>
                                 </div>
                                 </div>
                             </div>
@@ -101,4 +110,22 @@
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById("lbtn").addEventListener("click", function(event){
+  event.preventDefault()
+});
+        var x = document.getElementById("latitude");
+        var y = document.getElementById("longitude");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            x.value = position.coords.latitude;
+            y.value = position.coords.longitude;
+            }
+    </script>
 @endsection

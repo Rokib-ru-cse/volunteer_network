@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid py-5"
-        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);">
+        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:1000px">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -13,10 +13,10 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="service_type"
+                                <label for="service_type_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
                                 <div class="col-md-6">
-                                    <select name="service_type" required class="form-control">
+                                    <select name="service_type_id" required class="form-control">
                                         <option disabled selected>Choose...</option>
                                         {{$services = App\Models\ServiceType::all()}}
                                         @foreach($services as $service)
@@ -41,22 +41,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            
                             <div class="row mb-3">
-                                <label for="word"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Word Number') }}</label>
-                                <div class="col-md-6">
-                                    <select name="word" required class="form-control">
-                                        <option disabled selected>Choose...</option>
-                                        {{$words = App\Models\Word::all()}}
-                                        @foreach($words as $word)
-                                        <option value="{{$word['id']}}">{{$word['word_no']}}</option>
-                                        @endforeach
-                                      </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label 
+                                <label
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select Your Expected Gender') }}</label>
                                 <div class="col-md-6">
                                     <select name="gender" required class="form-control">
@@ -67,14 +53,22 @@
                                       </select>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-
                                 <div class="row mb-3">
                                     <label for="phone"
                                         class="col-md-4 col-form-label text-md-end">{{ __('phone') }}</label>
 
                                     <div class="col-md-6">
                                         <input type="number" name="phone" value="" required autocomplete="phone" autofocus>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="current_location"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Add Your Current Location') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input required type="hidden" value="" name="latitude" id="latitude">
+                                        <input required type="hidden" value="" name="longitude" id="longitude">
+                                        <button id="lbtn" required onclick="getLocation()" class="btn btn-outline-success">Click Here</button>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -104,4 +98,22 @@
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById("lbtn").addEventListener("click", function(event){
+  event.preventDefault()
+});
+        var x = document.getElementById("latitude");
+        var y = document.getElementById("longitude");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            x.value = position.coords.latitude;
+            y.value = position.coords.longitude;
+            }
+    </script>
 @endsection

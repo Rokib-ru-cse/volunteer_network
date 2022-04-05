@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVolunteerServicesTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateVolunteerServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('volunteer_services', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->bigInteger('service_type_id')->unsigned();
+            $table->string('location');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateVolunteerServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('volunteer_services');
+        Schema::dropIfExists('locations');
     }
 }

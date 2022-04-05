@@ -10,21 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class VolunteerController extends Controller
 {
-    public function profile_show($param){
+    public function profile_show(){
         // post section
         $id = Auth::user()->id;
         $statuss = Status::where('assigned_to', '=',$id)
-                            ->where('status','=',$param)->get();
+                            ->where('status','!=',"pending")->get();
         $posts = array();
         foreach($statuss as $status){
             array_push($posts,Post::find($status['post_id']));
         }
         //! post section
         // volunteer_service_type section
-            $all_volunteer_service_types = VolunteerService::all();
+            $this_volunteer_service_types =  VolunteerService::where("user_id",'=',Auth::user()->id)->get();
             $volunteer_service_type = null;
         // !volunteer_service_type section
         $posts = array_reverse($posts);
-        return view('volunteerprofile', ['posts' => $posts,'volunteer_service_types'=>$all_volunteer_service_types,'edit_volunteer_service_type'=>$volunteer_service_type]);
+        return view('volunteerprofile', ['posts' => $posts,'volunteer_service_types'=>$this_volunteer_service_types,'edit_volunteer_service_type'=>$volunteer_service_type]);
     }
 }

@@ -12,105 +12,70 @@ use App\Models\VolunteerService;
 class PostController extends Controller
 {
     //
-
-
     public function filter(Request $request)
     {
         $filter = $request->filter;
-        $word = Auth::user()->word;
         if (Auth::user()->type == "admin") {
-            $allpost = Post::where('service_type','=',$filter)
-                            ->orderBy('id', 'DESC')->get();
+            $allpost = Post::where('service_type_id', '=', $filter)
+                ->orderBy('id', 'DESC')->get();
             return view('home', ['posts' => $allpost]);
         }
         if (Auth::user()->type == "volunteer") {
-            $service_types = VolunteerService::where('user_id','=',Auth::user()->id)->get();
-            $allpost = Post::where('gender','=','any')
-            ->orwhere('gender','=',Auth::user()->gender)
-            ->where('word', '=', $word)
-            ->where('service_type','=',$filter)
-            ->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status','=','pending')
-        ->orwhere('status','=','rejected')
-        ->where('assigned_to','!=',Auth::user()->id)->get();
-        
-        $newallposts = array();
-        $a = null;
-        foreach($allpost as $post){
-            foreach($service_types as $service_type){
-                if($service_type['service_type']==$post['service_type']){
-                    $a = $post;
-                    break;
-                }else{
-                    $a = null;
-                }
-            }
-            if($a!=null){
-                array_push($newallposts,$a);
-            }
-        }
-        $a = null;
-        $posts = array();
-        foreach($newallposts as $post){
-            foreach($statuss as $status){
-                if($status['post_id']==$post['id']){
-                    $a = $post;
-                    break;
-                }else{
-                    $a = null;
-                }
-            }
-            array_push($posts,$a);
-        }
-        $posts = array_reverse($posts);
-        return view('home', ['posts' => $posts]);
+            $volunteer_service_types = VolunteerService::where('user_id', '=', Auth::user()->id)->get();
+            $allpost = Post::where('gender', '=', 'any')
+                ->orwhere('gender', '=', Auth::user()->gender)
+                ->where('location_id', '=', Auth::user()->location_id)
+                ->where('service_type_id', '=', $filter)
+                ->orderBy('id', 'DESC')->get();
+            $statuss = Status::where('status', '=', 'pending')
+                ->orwhere('status', '=', 'rejected')
+                ->where('assigned_to', '!=', Auth::user()->id)->get();
 
-        }
-        $allpost = Post::where('user_id','=',Auth::user()->id)
-            ->where('word', '=', $word)
-            ->where('service_type','=',$filter)
-            ->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status','=','pending')->get();
-        $posts = array();
-        $a=null;
-        foreach($allpost as $post){
-            foreach($statuss as $status){
-                if($status['post_id']==$post['id']){
-                    $a = $post;
-                    break;
-                }else{
-                    $a = null;
+            $newallposts = array();
+            $a = null;
+            foreach ($allpost as $post) {
+                foreach ($volunteer_service_types as $volunteer_service_type) {
+                    if ($volunteer_service_type['service_type_id'] == $post['service_type_id']) {
+                        $a = $post;
+                        break;
+                    } else {
+                        $a = null;
+                    }
+                }
+                if ($a != null) {
+                    array_push($newallposts, $a);
                 }
             }
-            array_push($posts,$a);
+            $a = null;
+            $posts = array();
+            foreach ($newallposts as $post) {
+                foreach ($statuss as $status) {
+                    if ($status['post_id'] == $post['id']) {
+                        $a = $post;
+                        break;
+                    } else {
+                        $a = null;
+                    }
+                }
+                if ($a != null) {
+                    array_push($posts, $a);
+                }
+            }
+            $posts = array_reverse($posts);
+            return view('home', ['posts' => $posts]);
         }
-        $posts = array_reverse($posts);
-        return view('home', ['posts' => $posts]);
+        if (Auth::user()->type == "user") {
+            $posts = Post::where('user_id', '=', Auth::user()->id)
+                ->where('service_type_id', '=', $filter)
+                ->orderBy('id', 'DESC')->get();
+            return view('home', ['posts' => $posts]);
+        }
     }
 
 
-    public function profile_show($param)
+    public function profile_show()
     {
-        $id = Auth::user()->id;
-        $allpost = Post::where("user_id", '=', $id)->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status','=',$param)->get();
-        $posts = array();
-        $a = null;
-        foreach($allpost as $post){
-            foreach($statuss as $status){
-                if($status['post_id']==$post['id']){
-                    $a = $post;
-                    break;
-                }else{
-                    $a = null;
-                }
-            }
-            if($a!=null){
-                array_push($posts,$a);
-            }
-        }
-        $posts = array_reverse($posts);
-        return view('profile', ['posts' => $posts]);
+        return view('profile');
     }
 
     public function postdetail(Request $request, $id)
@@ -124,10 +89,12 @@ class PostController extends Controller
         $post = new Post;
         $post->user_id = Auth::user()->id;
         $post->email = $request->email;
-        $post->word = $request->word;
+        $post->location_id = Auth::user()->location_id;
         $post->gender = $request->gender;
         $post->phone = $request->phone;
-        $post->service_type = $request->service_type;
+        $post->latitude = $request->latitude;
+        $post->longitude = $request->longitude;
+        $post->service_type_id = $request->service_type_id;
         $post->address = $request->address;
         $post->description = $request->description;
         $post->save();
@@ -143,23 +110,23 @@ class PostController extends Controller
     }
     public function editpost(Request $request, $id)
     {
-
         $data = Post::find($id);
         $data['email'] = $request->email;
         $data['phone'] = $request->phone;
-        $data['service_type'] = $request->service_type;
-        $data['word'] = $request->word;
+        $data['latitude'] = $request->latitude;
+        $data['longitude'] = $request->longitude;
+        $data['service_type_id'] = $request->service_type_id;
+        $data['location_id'] = $request->location_id;
         $data['gender'] = $request->gender;
         $data['address'] = $request->address;
         $data['description'] = $request->description;
         $data->save();
-        return redirect()->route('profile','processing');
+        return redirect()->route('home');
     }
-
     public function destroy(Request $request, $id)
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('profile','processing');
+        return redirect()->route('home');
     }
 }

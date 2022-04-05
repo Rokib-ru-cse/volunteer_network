@@ -24,6 +24,14 @@ class ServiceTypeSeeder extends Seeder
             'Take and donate photos during community events',
             'Donate blood',
             'Contact your reps about local issues',
+            'Help kids with their homework',
+            'free music lessons',
+            'IT help to local adults',
+            'patch up clothes and stuffed toys',
+            'Helping neighbors with repairs',
+            'Deliver groceries and meals ',
+            'Pick up medicine',
+            'share books',
         ];
         foreach($service_types as $service_type){
 

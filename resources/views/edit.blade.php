@@ -11,10 +11,10 @@
                         <form method="POST" action="{{route('editpost',$post['id'])}}">
                             @csrf
                             <div class="row mb-3">
-                                <label for="service_type"
+                                <label for="service_type_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
                                 <div class="col-md-6">
-                                    <select name="service_type" required class="form-control">
+                                    <select name="service_type_id" required class="form-control">
                                         <option selected value="{{$post['service_type_id']}}">{{App\Models\ServiceType::find($post['service_type_id'])['name']}}</option>
                                         {{$services = App\Models\ServiceType::all()}}
                                         @foreach($services as $service)
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label 
+                                <label
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select Your Expected Gender') }}</label>
                                 <div class="col-md-6">
                                     <select name="gender" required class="form-control">
@@ -83,7 +83,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <textarea class="form-control" name="description" required autofocus>{{ $post['description'] }}</textarea> 
+                                    <textarea class="form-control" name="description" required autofocus>{{ $post['description'] }}</textarea>
                                 </div>
                                 </div>
                             </div>

@@ -58,8 +58,9 @@ height: 100vh;">
                     @if (Auth::user()->type == 'admin')
                         <a href="{{ route('userlist') }}" class="btn btn-outline-primary mx-2">User List</a>
                         <a href="{{ route('volunteerlist') }}" class="btn btn-outline-primary">Volunteer List</a>
-                        <a href="{{ route('service') }}" class="btn btn-outline-primary">Service List</a>
-                        <a href="{{ route('word') }}" class="btn btn-outline-primary">Word List</a>
+                        <a href="{{ route('service') }}" class="btn btn-outline-primary mx-2">Service List</a>
+                        {{-- <a href="{{ route('word') }}" class="btn btn-outline-primary">word List</a> --}}
+                        <a href="{{ route('location') }}" class="btn btn-outline-primary">Location List</a>
                     @endif
                 @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -98,12 +99,11 @@ height: 100vh;">
                                         {{ __('Logout') }}
                                     </a>
                                     @if (Auth::user()->type == 'volunteer')
-                                    <a class="dropdown-item" href="{{ route('volunteerprofile','processing') }}">
-
+                                    <a class="dropdown-item" href="{{ route('volunteerprofile') }}">
                                         {{ __('Profile') }}
                                     </a>
                                     @else
-                                    <a class="dropdown-item" href="{{  route('profile','processing') }}">
+                                    <a class="dropdown-item" href="{{  route('profile') }}">
 
                                         {{ __('Profile') }}
                                     </a>

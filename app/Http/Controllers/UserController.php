@@ -40,32 +40,13 @@ class UserController extends Controller
 
     public function userposts($id)
     {
-
-        $allpost = Post::where('user_id', '=', $id)->orderBy('id', 'DESC')->get();
-        $statuss = Status::where('status', '=', 'pending')->get();
-        $newallposts = array();
-        $a = null;
-        foreach ($allpost as $post) {
-            foreach ($statuss as $status) {
-                if ($status['post_id'] == $post['id']) {
-                    $a = $post;
-                    break;
-                } else {
-                    $a = null;
-                }
-            }
-            if ($a != null) {
-                array_push($newallposts, $a);
-            }
-        }
-
-        return view('userservicerelated', ['id' => $id, 'posts' => $newallposts]);
+        $posts = Post::where('user_id', '=', $id)->orderBy('id', 'DESC')->get();
+        return view('userservicerelated', ['id' => $id, 'posts' => $posts]);
     }
 
     public function volunteerposts($id)
     {
-        $statuss = Status::where('assigned_to', '=', $id)
-            ->where('status', '=', 'processing')->get();
+        $statuss = Status::where('assigned_to', '=', $id)->get();
         $posts = array();
         foreach ($statuss as $status) {
             array_push($posts, Post::find($status['post_id']));

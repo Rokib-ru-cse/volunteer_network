@@ -15,7 +15,7 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
                                 <div class="col-md-6">
                                     <select name="service_type" required class="form-control">
-                                        <option selected value="{{$post['service_type']}}">{{App\Models\ServiceType::find($post['service_type'])['name']}}</option>
+                                        <option selected value="{{$post['service_type_id']}}">{{App\Models\ServiceType::find($post['service_type_id'])['name']}}</option>
                                         {{$services = App\Models\ServiceType::all()}}
                                         @foreach($services as $service)
                                         <option value="{{$service['id']}}">{{$service['name']}}</option>
@@ -39,16 +39,15 @@
                                     @enderror
                                 </div>
                             </div>
-                            
                             <div class="row mb-3">
-                                <label for="word"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Word Number') }}</label>
+                                <label for="location"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Location') }}</label>
                                 <div class="col-md-6">
-                                    <select name="word" required class="form-control">
-                                        <option selected value="{{$post['word']}}">{{App\Models\Word::find($post['word'])['word_no']}}</option>
-                                        {{$words = App\Models\Word::all()}}
-                                        @foreach($words as $word)
-                                        <option value="{{$word['id']}}">{{$word['word_no']}}</option>
+                                    <select name="location_id" required class="form-control">
+                                        <option selected value="{{$post['location_id']}}">{{App\Models\Location::find($post['location_id'])['location']}}</option>
+                                        {{$locations = App\Models\Location::all()}}
+                                        @foreach($locations as $location)
+                                        <option value="{{$location['id']}}">{{$location['location']}}</option>
                                         @endforeach
                                       </select>
                                 </div>

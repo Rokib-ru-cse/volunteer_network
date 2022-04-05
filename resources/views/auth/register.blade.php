@@ -61,14 +61,14 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="word"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Word Number') }}</label>
+                                <label for="location"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Select Your Location') }}</label>
                                 <div class="col-md-6">
-                                    <select name="word" required class="form-control">
+                                    <select name="location_id" required class="form-control">
                                         <option disabled selected>Choose...</option>
-                                        {{$words = App\Models\Word::all()}}
-                                        @foreach($words as $word)
-                                        <option value="{{$word['id']}}">{{$word['word_no']}}</option>
+                                        {{$locations = App\Models\Location::all()}}
+                                        @foreach($locations as $location)
+                                        <option value="{{$location['id']}}">{{$location['location']}}</option>
                                         @endforeach
                                       </select>
                                 </div>

@@ -24,8 +24,8 @@
                             <td>{{ $user['phone'] }}</td>
                         </tr>
                         <tr>
-                            <th scope="row">User word Number : </th>
-                            <td>{{ $user['word'] }}</td>
+                            <th scope="row">User Location : </th>
+                            <td>{{App\Models\Location::find($user['location_id'])['location'] }}</td>
                         </tr>
                         <tr>
                             <th scope="row">User Type : </th>

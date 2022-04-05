@@ -9,7 +9,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Word</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Created</th>
                         <th scope="col">Delete</th>
@@ -22,10 +22,10 @@
                     @endphp
                     @foreach ($volunteers as $volunteer)
                         <tr>
-                            <th scope="row">{{ $i }}</th>
+                            <th scope="row">{{ $i++ }}</th>
                             <td><a href="{{ route('userdetails', $volunteer['id']) }}">{{ $volunteer['name'] }}</a></td>
                             <td>{{ $volunteer['email'] }}</td>
-                            <td>{{ $volunteer['word'] }}</td>
+                            <td>{{ App\Models\Location::find($volunteer['location_id'])['location'] }}</td>
                             <td>{{ $volunteer['phone'] }}</td>
                             <td>{{ $volunteer['created_at']->diffForHumans() }}</td>
                             <td>
@@ -39,9 +39,6 @@
                             <td><a href="{{ route('volunteerposts', $volunteer['id']) }}" class="btn btn-outline-success">View
                                     Posts</a></td>
                         </tr>
-                        @php
-                            $i++;
-                        @endphp
                     @endforeach
                 </tbody>
             </table>

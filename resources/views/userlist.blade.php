@@ -8,7 +8,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Word</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Created</th>
                         <th scope="col">Delete</th>
@@ -25,7 +25,7 @@
                             <th scope="row">{{ $i }}</th>
                             <td><a href="{{ route('userdetails', $user['id']) }}">{{ $user['name'] }}</a></td>
                             <td>{{ $user['email'] }}</td>
-                            <td>{{ $user['word'] }}</td>
+                            <td>{{ App\Models\Location::find($user['location_id'])['location'] }}</td>
                             <td>{{ $user['phone'] }}</td>
                             <td>{{ $user['created_at']->diffForHumans() }}</td>
                             <td>

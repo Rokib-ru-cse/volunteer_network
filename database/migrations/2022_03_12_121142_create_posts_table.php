@@ -15,12 +15,12 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('service_type');
+            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('service_type_id');
             $table->string('gender');
             $table->string('email')->nullable();
-            $table->integer('word');
             $table->string('phone');
             $table->text('address');
             $table->text('description');

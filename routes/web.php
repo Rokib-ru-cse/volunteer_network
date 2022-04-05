@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -15,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -38,6 +41,14 @@ Route::get('/word/{id}', [WordController::class, 'editword'])->name('editword');
 Route::post('/word/{id}', [WordController::class, 'eword'])->name('editword');
 //! word route
 
+// location route
+Route::get('/location', [LocationController::class, 'location'])->name('location');
+Route::post('/location', [LocationController::class, 'addlocation'])->name('location');
+Route::delete('/location/{id}', [LocationController::class, 'destroylocation'])->name('destroylocation');
+Route::get('/location/{id}', [LocationController::class, 'editlocation'])->name('editlocation');
+Route::post('/location/{id}', [LocationController::class, 'elocation'])->name('editlocation');
+//! location route
+
 // volunteer service types route
 Route::post('/volunteer_service_type', [VolunteerServiceController::class, 'addvolunteer_service_type'])->name('volunteer_service_type');
 Route::delete('/volunteer_service_type/{id}', [VolunteerServiceController::class, 'destroy_volunteer_service_type'])->name('destroy_volunteer_service_type');
@@ -48,12 +59,12 @@ Route::post('/postdetails/{id}', [StatusController::class, 'updatestatus'])->nam
 //!status route
 
 //volunteer route
-Route::get('/volunteerprofile/{param}', [VolunteerController::class, 'profile_show'])->name('volunteerprofile');
+Route::get('/volunteerprofile', [VolunteerController::class, 'profile_show'])->name('volunteerprofile');
 //!volunteer route
 
 
+Route::get('/profile', [PostController::class, 'profile_show'])->name('profile');
 Route::delete('/profile/{id}', [PostController::class, 'destroy'])->name('destroy');
-Route::get('/profile/{param}', [PostController::class, 'profile_show'])->name('profile');
 Route::post('/store', [PostController::class, 'store'])->name('storepost');
 Route::post('/edit/{id}', [PostController::class, 'editpost'])->name('editpost');
 Route::get('/profile/edit/{id}', [PostController::class, 'edit'])->name('edit');
@@ -71,4 +82,4 @@ Route::get('/adminservices/{id}/{param}', [UserController::class, 'adminservices
 Route::get('/userlist/{id}', [UserController::class, 'userdetails'])->name('userdetails');
 //!admin route
 
-
+});

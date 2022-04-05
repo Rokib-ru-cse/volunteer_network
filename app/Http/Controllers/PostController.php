@@ -92,6 +92,8 @@ class PostController extends Controller
         $post->location_id = Auth::user()->location_id;
         $post->gender = $request->gender;
         $post->phone = $request->phone;
+        $post->latitude = $request->latitude;
+        $post->longitude = $request->longitude;
         $post->service_type_id = $request->service_type_id;
         $post->address = $request->address;
         $post->description = $request->description;
@@ -111,6 +113,8 @@ class PostController extends Controller
         $data = Post::find($id);
         $data['email'] = $request->email;
         $data['phone'] = $request->phone;
+        $data['latitude'] = $request->latitude;
+        $data['longitude'] = $request->longitude;
         $data['service_type_id'] = $request->service_type_id;
         $data['location_id'] = $request->location_id;
         $data['gender'] = $request->gender;

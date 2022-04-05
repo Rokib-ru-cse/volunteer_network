@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid py-5"
-        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:1000px">
+        style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);">
         <div class="table-responsive-sm">
             <div class="row">
                 @php
@@ -72,6 +72,13 @@
                         </div>
                         </form>
                     @endif
+                </div>
+            </div>
+            <div class="row py-5">
+                <div class="col-md-8 mx-auto">
+                    <h3 class="text-center mb-3">Location in Google Map</h3>
+                    <hr>
+                <iframe src="https://maps.google.com/maps?q={{ $post['latitude'] }}, {{ $post['longitude'] }}&z=15&output=embed" width="100%" height="400" frameborder="0" style="border:0"></iframe>
                 </div>
             </div>
         </div>

@@ -73,6 +73,16 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                    <label for="current_location"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('Update Your Current Location') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input required type="hidden" value="{{ $post['latitude'] }}" name="latitude" id="latitude">
+                                        <input required type="hidden" value="{{ $post['longitude'] }}" name="longitude" id="longitude">
+                                        <button id="lbtn" required onclick="getLocation()" class="btn btn-outline-success">Click Here</button>
+                                    </div>
+                                </div>
+                            <div class="row mb-3">
                                 <label for="address"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
                                 <div class="col-md-6">
@@ -100,4 +110,22 @@
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById("lbtn").addEventListener("click", function(event){
+  event.preventDefault()
+});
+        var x = document.getElementById("latitude");
+        var y = document.getElementById("longitude");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            x.value = position.coords.latitude;
+            y.value = position.coords.longitude;
+            }
+    </script>
 @endsection

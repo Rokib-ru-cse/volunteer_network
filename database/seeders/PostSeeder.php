@@ -18,6 +18,7 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::truncate();
+        $faker = \Faker\Factory::create();
         $posts = [
             [
                 'user_id'=>User::where('email','=','user1@gmail.com')->get()[0]['id'],
@@ -26,8 +27,8 @@ class PostSeeder extends Seeder
                 'gender'=>'male',
                 'phone'=>'12345678901',
                 'service_type_id'=>'1',
-                'address'=>'rajshahi university',
-                'description'=>'sometext'
+                'address'=>$faker->address(),
+                'description'=>$faker->paragraph,
             ],
         ];
         foreach($posts as $post){
@@ -38,8 +39,8 @@ class PostSeeder extends Seeder
                 'gender'=>$post['gender'],
                 'phone'=>$post['phone'],
                 'location_id'=>$post['location_id'],
-                'address'=>$post['address'],
-                'description'=>$post['description'],
+                'address'=>$faker->address(),
+                'description'=>$faker->paragraph,
             ]);
         }
         $posts = Post::all();

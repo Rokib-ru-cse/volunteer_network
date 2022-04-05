@@ -242,7 +242,7 @@ class UserSeeder extends Seeder
             ]);
         }
         $users = User::where('type', '=', 'volunteer')->get();
-        $service_types = ServiceType::limit(5)->get();
+        $service_types = ServiceType::limit(10)->get();
         VolunteerService::truncate();
         foreach ($users as $user) {
             foreach ($service_types as $service_type) {

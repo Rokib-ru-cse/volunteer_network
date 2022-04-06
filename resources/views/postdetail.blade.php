@@ -78,7 +78,7 @@
                 <div class="col-md-8 mx-auto">
                     <h3 class="text-center mb-3">Location in Google Map</h3>
                     <hr>
-                <iframe src="https://maps.google.com/maps?q={{ $post['latitude'] }}, {{ $post['longitude'] }}&z=15&output=embed" width="100%" height="400" frameborder="0" style="border:0"></iframe>
+                <iframe src="https://maps.google.com/maps?q={{ $post['latitude'] }}, {{ $post['longitude'] }}&z=15&output=embed" width="100%" height="500" frameborder="0" style="border:0"></iframe>
                 </div>
             </div>
         </div>

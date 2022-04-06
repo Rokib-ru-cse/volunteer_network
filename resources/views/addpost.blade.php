@@ -118,7 +118,7 @@
             }
             function showPosition(position) {
                 x.value = position.coords.latitude;
-                y.value = position.coords.longitude;
+                y.value = position.coords.longitude;  
                 }
                 function error(err) {
       console.warn(ERROR(${err.code}): ${err.message});

@@ -102,11 +102,16 @@
     document.getElementById("lbtn").addEventListener("click", function(event){
   event.preventDefault()
 });
+var options = {
+    enableHighAccuracy: true,
+                timeout: 50000,
+                maximumAge: 0
+};
         var x = document.getElementById("latitude");
         var y = document.getElementById("longitude");
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                navigator.geolocation.getCurrentPosition(showPosition, error, options);
             } else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
@@ -115,5 +120,8 @@
             x.value = position.coords.latitude;
             y.value = position.coords.longitude;
             }
+            function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
     </script>
 @endsection

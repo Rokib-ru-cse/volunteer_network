@@ -102,7 +102,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'user9',
-                'email' => 'user8@gmail.com',
+                'email' => 'user9@gmail.com',
                 'gender' => 'male',
                 'type' => 'user',
                 'location_id' => '5',
@@ -242,7 +242,7 @@ class UserSeeder extends Seeder
             ]);
         }
         $users = User::where('type', '=', 'volunteer')->get();
-        $service_types = ServiceType::limit(5)->get();
+        $service_types = ServiceType::limit(10)->get();
         VolunteerService::truncate();
         foreach ($users as $user) {
             foreach ($service_types as $service_type) {

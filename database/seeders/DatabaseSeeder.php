@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
         // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::disableForeignKeyConstraints();
         $this->call([
-            UserSeeder::class,
-            LocationSeeder::class,
             ServiceTypeSeeder::class,
+            LocationSeeder::class,
+            UserSeeder::class,
             PostSeeder::class,
         ]);
     }

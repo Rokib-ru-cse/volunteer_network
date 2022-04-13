@@ -2,8 +2,10 @@
 @section('content')
     <div class="container-fluid pt-5"
         style="background: linear-gradient(335deg, rgba(255,140,107,1) 0%, rgba(255,228,168,1) 100%);height:2000px">
-        <div class="container">
-            <h1 class="text-center mb-3">Your Profile</h1>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="text-center mb-3">Your Profile</h1>
             <table class="table table-striped table-dark">
                 <tbody>
                     <tr>
@@ -32,16 +34,13 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-        {{-- volunteer service type section --}}
+                </div>
 
-        <div class="container text-center mt-4">
-            <div class="row">
-                <div class="col-md-6 offset-3">
+                <div class="col-md-6 text-center">
                     <form action="{{ route('volunteer_service_type') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <h4 class="pb-2">Please Add Service Types you are giving</h4>
+                            <h4 class="pb-2">Please Add Service Types you want to provide</h4>
                             <div class="row mb-3">
                                 <label for="service_type"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Select service_type') }}</label>
@@ -61,11 +60,8 @@
                         </div>
                         <button type="submit" class="mt-3 btn btn-outline-primary">Submit</button>
                     </form>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-md-6 offset-3">
-                    <h4 class="pb-2">Types of Service you are giving</h4>
+
+                <h4 class="py-2">Types of Service you are providing</h4>
                     <table class="table table-striped table-dark">
                         <thead>
                             <tr>
@@ -102,7 +98,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         {{-- new volunteer service type section --}}
         <div class="container">
             @if (count($posts) == 0)

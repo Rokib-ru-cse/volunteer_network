@@ -12,26 +12,17 @@
     <!-- Styles -->
 </head>
 
-<body >
+<body style="margin-top: -20px;padding:0px">
     @if (Auth::user())
         {{-- {{ Redirect::to('home') }} --}}
         <script>
             window.location = "/home";
         </script>
     @endif
-    <div class="bg-image img-responsive" style="
-     background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)),url({{ url('images/volunteer.png') }}) no-repeat center center;
-     background-size: cover;
-    position:absoulte;
-    margin-left: auto;
-    margin-right: auto;
-    width:95%;
-    height:100vh;
-    content:'';
-    top:0px;
-    left: 0px;
-    z-index:-1;
-      "
+    <div style=
+    "width: 100%;
+    height: 100vh;
+      ;background: url({{ url('images/volunteer.png') }}) no-repeat center center / cover;"
       >
         @if (Route::has('login'))
             <div class="my-3 text-end " style="position: relative;">
@@ -46,13 +37,13 @@
                 @endauth
             </div>
         @endif
-        <div class="text-center " style="position: relative;  color: #000;
+        {{-- <div class="text-center " style="position: relative;  color: #000;
         font-size: 3rem;
         z-index:1;
         line-height: 0.9;margin-top:300px">
             <p>Welcome to Rajshahi local area Volunteer Network</p>
             <p>Please login to get or provide service</p>
-        </div>
+        </div> --}}
     </div>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

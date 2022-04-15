@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid text-center pt-5" style="background: rgb(96, 233, 243,.5);height:1000px">
+    <div class="container-fluid text-center pt-5" style="background: rgb(96, 233, 243,.5);">
         <div class="row">
             <div class="col-md-6 offset-3">
                 @if ($editservice != null)
@@ -17,7 +17,7 @@
                             placeholder="Enter sesson ex. 2000-2001">
                     @else
                         <input type="text" name="service" class="mt-2 form-control"
-                            placeholder="Add service ex. খাবার প্রস্তুতি">
+                            placeholder="Add service ex. Blood Donation">
                     @endif
                 </div>
                 <button type="submit" class="mt-3 btn btn-outline-primary">Submit</button>

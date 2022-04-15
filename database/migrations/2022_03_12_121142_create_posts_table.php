@@ -22,8 +22,8 @@ class CreatePostsTable extends Migration
             $table->string('gender');
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->text('address');
             $table->text('description');
             $table->timestamps();

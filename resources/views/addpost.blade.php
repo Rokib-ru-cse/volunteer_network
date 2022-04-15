@@ -66,9 +66,9 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Add Your Current Location') }}</label>
 
                                     <div class="col-md-6">
-                                        <input required type="hidden" value="" name="latitude" id="latitude">
-                                        <input required type="hidden" value="" name="longitude" id="longitude">
-                                        <button id="lbtn" required onclick="getLocation()" class="btn btn-outline-success">Click Here</button>
+                                        <input type="hidden" value="" name="latitude" id="latitude">
+                                        <input type="hidden" value="" name="longitude" id="longitude">
+                                        <button id="lbtn" onclick="getLocation()" class="btn btn-outline-success">Click Here</button>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -98,30 +98,4 @@
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById("lbtn").addEventListener("click", function(event){
-      event.preventDefault()
-    });
-    var options = {
-        enableHighAccuracy: true,
-                    timeout: 50000,
-                    maximumAge: 0
-    };
-            var x = document.getElementById("latitude");
-            var y = document.getElementById("longitude");
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition, error, options);
-                } else {
-                    x.innerHTML = "Geolocation is not supported by this browser.";
-                }
-            }
-            function showPosition(position) {
-                x.value = position.coords.latitude;
-                y.value = position.coords.longitude;  
-                }
-                function error(err) {
-      console.warn(ERROR(${err.code}): ${err.message});
-    }
-        </script>
 @endsection

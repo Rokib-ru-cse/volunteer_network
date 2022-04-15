@@ -50,13 +50,17 @@
                             @if ($status->status == 'completed')
                                 <tr>
                                     <th scope="row">Completed By : </th>
-                                    <td><a href="{{ route('userdetails', $status->assigned_to) }}">{{App\Models\User::find($status->assigned_to)['name']}}</a></td>
+                                    <td><a
+                                            href="{{ route('userdetails', $status->assigned_to) }}">{{ App\Models\User::find($status->assigned_to)['name'] }}</a>
+                                    </td>
                                 </tr>
                             @endif
                             @if ($status->status == 'processing')
                                 <tr>
                                     <th scope="row">Processing By : </th>
-                                    <td><a href="{{ route('userdetails', $status->assigned_to) }}">{{App\Models\User::find($status->assigned_to)['name']}}</a></td>
+                                    <td><a
+                                            href="{{ route('userdetails', $status->assigned_to) }}">{{ App\Models\User::find($status->assigned_to)['name'] }}</a>
+                                    </td>
                                 </tr>
                             @endif
                         </tbody>
@@ -78,7 +82,9 @@
                 <div class="col-md-8 mx-auto">
                     <h3 class="text-center mb-3">Location in Google Map</h3>
                     <hr>
-                <iframe src="https://maps.google.com/maps?q={{ $post['latitude'] }}, {{ $post['longitude'] }}&z=15&output=embed" width="100%" height="500" frameborder="0" style="border:0"></iframe>
+                    <iframe
+                        src="https://maps.google.com/maps?q={{ $post['latitude'] == null ? 0 : $post['latitude'] }}, {{ $post['longitude'] == null ? 0 : $post['longitude'] }}&z=15&output=embed"
+                        width="100%" height="500" frameborder="0" style="border:0"></iframe>
                 </div>
             </div>
         </div>

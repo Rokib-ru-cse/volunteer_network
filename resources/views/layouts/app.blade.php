@@ -46,13 +46,13 @@ height: 100vh;">
                         <a href="{{ route('addpost') }}" class="btn btn-outline-success">Need Help ?</a>
                     @endif
                     <form class="d-flex mx-5" method="GET" action="{{ route('filter') }}">
-                            <select name="filter" required class="form-control">
-                                <option disabled selected>Filter By ServiceType</option>
-                                {{$services = App\Models\ServiceType::all()}}
-                                @foreach($services as $service)
-                                <option value="{{$service['id']}}">{{$service['name']}}</option>
-                                @endforeach
-                              </select>
+                        <select name="filter" required class="form-control">
+                            <option disabled selected>Filter By ServiceType</option>
+                            {{ $services = App\Models\ServiceType::all() }}
+                            @foreach ($services as $service)
+                                <option value="{{ $service['id'] }}">{{ $service['name'] }}</option>
+                            @endforeach
+                        </select>
                         <button class="btn btn-outline-danger mx-2" type="submit">Filter</button>
                     </form>
                     @if (Auth::user()->type == 'admin')
@@ -95,18 +95,18 @@ height: 100vh;">
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
+                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
                                     @if (Auth::user()->type == 'volunteer')
-                                    <a class="dropdown-item" href="{{ route('volunteerprofile') }}">
-                                        {{ __('Profile') }}
-                                    </a>
+                                        <a class="dropdown-item" href="{{ route('volunteerprofile') }}">
+                                            {{ __('Profile') }}
+                                        </a>
                                     @else
-                                    <a class="dropdown-item" href="{{  route('profile') }}">
+                                        <a class="dropdown-item" href="{{ route('profile') }}">
 
-                                        {{ __('Profile') }}
-                                    </a>
+                                            {{ __('Profile') }}
+                                        </a>
                                     @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
@@ -124,6 +124,35 @@ height: 100vh;">
             @yield('content')
         </main>
     </div>
+    <script>
+        document.getElementById("lbtn").addEventListener("click", function(event) {
+            event.preventDefault();
+        });
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 50000,
+            maximumAge: 0
+        };
+        var x = document.getElementById("latitude");
+        var y = document.getElementById("longitude");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, error, options);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.value = position.coords.latitude;
+            y.value = position.coords.longitude;
+        }
+
+        function error(err) {
+            console.log(err.message);
+        }
+    </script>
 </body>
 
 </html>
